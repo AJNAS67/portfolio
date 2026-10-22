@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ArrowRight, Github, Play, ExternalLink, CheckCircle2, Sparkles } from 'lucide-react';
+import { ArrowRight, Github, Play, ExternalLink, CheckCircle2, Sparkles, Globe } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -11,11 +11,12 @@ import {
 
 interface Project {
   title: string;
-  category: 'enterprise' | 'ai-gis' | 'mobile';
+  category: 'enterprise' | 'ai-gis' | 'mobile' | 'creative';
   tag: string;
   description: string;
   features: string[];
   tech: string[];
+  liveUrl?: string;
   githubUrl?: string;
   videoUrl?: string;
   story?: {
@@ -26,6 +27,35 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    title: 'Ferrari F8 Tributo — Cinematic 3D Automotive Experience',
+    category: 'creative',
+    tag: 'Creative Frontend · 60 FPS Canvas',
+    description:
+      'A high-performance, scroll-driven automotive digital showroom showcasing the Ferrari F8 Tributo. Built with React 19, TypeScript, and GSAP ScrollTrigger, it replaces heavy 3D WebGL runtimes with a custom HTML5 Canvas 300-frame image sequence engine delivering 60 FPS performance, procedural Web Audio API engine sound synthesis, and interactive HUD telemetry.',
+    features: ['Custom 300-Frame Canvas Engine', 'GSAP ScrollTrigger Timeline', 'Procedural Web Audio V8 Synthesizer', 'Interactive HUD Telemetry'],
+    tech: ['React 19', 'TypeScript', 'GSAP ScrollTrigger', 'HTML5 Canvas 2D', 'Web Audio API', 'Vite'],
+    liveUrl: 'https://porche-animated.onrender.com',
+    githubUrl: 'https://github.com/AJNAS67/porche-animated',
+    story: {
+      overview:
+        'The Ferrari F8 Tributo Cinematic Experience is an interactive automotive showcase engineered to push the boundaries of browser performance and creative web design. Instead of relying on bandwidth-heavy 3D GLTF models, the application implements an optimized HTML5 Canvas 2D frame sequence renderer that synchronizes 300 high-resolution render frames directly to scroll position and touch/drag interactions.',
+      highlights: [
+        'Scroll-Bound 360° Sequence Engine: Pinned GSAP ScrollTrigger timeline orchestrating 300 photorealistic frames across 5 driving dynamics states (Launch, Drift, Aero Deceleration, Stance Halt, Dihedral Cockpit Reveal).',
+        'Direct Canvas Touch & Drag Scrubbing: Interactive drag-to-rotate functionality allowing users to manually scrub frames with inertia, complementing the scroll sequence.',
+        'Interactive Engineering Hotspots: Real-time spatial markers revealing deep-dive technical specs on the Brembo Carbon-Ceramic Brakes, F1 S-Duct, Cockpit HMI, and Active Rear Diffuser.',
+        'Procedural Web Audio Engine: Zero-asset audio synthesis using browser native AudioContext, BiquadFilter, and oscillators (48Hz V8 idle rumble + 1.4kHz turbo whistle) with zero download overhead.',
+        'Progressive 3-Tier Preloader & Retina DPR Clamping: Priority frame batching and dynamic DPR scaling (capped at 2.0 desktop, 1.5 mobile) ensuring a silky 60 FPS without GPU thermal throttling.',
+      ],
+      techDetails: [
+        { name: 'React 19 & Vite 8', role: 'Modern component lifecycle and ultra-fast build tooling with strict TypeScript.' },
+        { name: 'GSAP 3 & ScrollTrigger', role: 'Sub-pixel scrubbed timeline pinning and frame interpolation math.' },
+        { name: 'HTML5 Canvas 2D API', role: 'Lightweight high-speed 60 FPS frame sequence engine with nearest-neighbor fallback cache.' },
+        { name: 'Web Audio API', role: 'Real-time procedural dual-oscillator sound synthesis generating twin-turbo spool and V8 exhaust rumble.' },
+        { name: 'Dynamic DPR & Preloader', role: 'Clamps device pixel ratio and streams frames progressively to prevent buffer bottlenecking.' },
+      ],
+    },
+  },
   {
     title: 'AI / MCP Gateway Server for Microservices Integration',
     category: 'ai-gis',
@@ -182,9 +212,10 @@ const projects: Project[] = [
 
 const categories = [
   { id: 'all', label: 'All Projects' },
+  { id: 'creative', label: 'Creative & 3D Web' },
   { id: 'ai-gis', label: 'AI & GIS Pipelines' },
   { id: 'enterprise', label: 'Enterprise & Gov' },
-  { id: 'mobile', label: 'Mobile & SaaS' },
+  { id: 'mobile', label: 'Mobile Apps' },
 ] as const;
 
 const ProjectCard = ({
@@ -231,6 +262,19 @@ const ProjectCard = ({
         </span>
 
         <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit Live Project"
+              className="h-8 px-2.5 rounded-lg border border-primary/40 bg-primary/10 flex items-center gap-1.5 text-primary text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-all"
+              title="Visit Live Website"
+            >
+              <ExternalLink size={13} />
+              <span>Live</span>
+            </a>
+          )}
           {project.githubUrl && (
             <a
               href={project.githubUrl}
@@ -372,7 +416,19 @@ const ProjectsSection = () => {
                   {selectedProject.tag}
                 </span>
 
-                <div className="flex items-center gap-2.5">
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {selectedProject.liveUrl && (
+                    <a
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+                    >
+                      <Globe size={13} />
+                      Live Website
+                      <ExternalLink size={12} className="opacity-80" />
+                    </a>
+                  )}
                   {selectedProject.githubUrl && (
                     <a
                       href={selectedProject.githubUrl}
@@ -390,7 +446,7 @@ const ProjectsSection = () => {
                       href={selectedProject.videoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary/30 bg-primary/10 text-primary text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-all"
                     >
                       <Play size={13} className="fill-current" />
                       Watch Demo
@@ -468,13 +524,24 @@ const ProjectsSection = () => {
                   ))}
                 </div>
 
-                <div className="flex items-center gap-2.5">
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {selectedProject.liveUrl && (
+                    <a
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+                    >
+                      <Globe size={15} />
+                      Live Site
+                    </a>
+                  )}
                   {selectedProject.githubUrl && (
                     <a
                       href={selectedProject.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border/60 hover:border-primary/50 text-foreground text-sm font-medium transition-colors"
                     >
                       <Github size={16} />
                       View on GitHub
@@ -488,7 +555,7 @@ const ProjectsSection = () => {
                       className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/40 hover:border-primary text-primary text-sm font-medium transition-colors"
                     >
                       <Play size={15} className="fill-current" />
-                      Watch Demo Video
+                      Watch Demo
                     </a>
                   )}
                 </div>

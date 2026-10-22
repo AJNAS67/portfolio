@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import heroImage from '@/assets/hero-profile.jpg';
+
 const navItems = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
@@ -29,8 +31,13 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="font-display text-xl font-bold text-gradient">
-          AJNAS
+        <a href="#" className="flex items-center gap-3 group">
+          <div className="w-9 h-9 rounded-full overflow-hidden border border-primary/40 ring-1 ring-primary/20 group-hover:border-primary transition-colors">
+            <img src={heroImage} alt="Muhammed Ajnas" className="w-full h-full object-cover" />
+          </div>
+          <span className="font-display text-xl font-bold text-gradient">
+            AJNAS
+          </span>
         </a>
 
         {/* Desktop */}
