@@ -22,7 +22,7 @@ const AboutSection = () => {
           <div className="glass-card p-8 md:p-10 space-y-6">
             <p className="text-muted-foreground leading-relaxed text-lg">
               I'm a <span className="text-foreground font-semibold">Software Engineer</span> at{' '}
-              <span className="text-primary font-medium">ULTS Global, Kochi</span> with{' '}
+              <span className="text-primary font-medium">UL Technology Solutions (ULTS), Kozhikode</span> with{' '}
               <span className="text-foreground font-semibold">4 years of experience</span> designing and delivering enterprise web applications across the full stack.
             </p>
             <p className="text-muted-foreground leading-relaxed text-base sm:text-lg">
@@ -59,7 +59,7 @@ const AboutSection = () => {
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                <span><strong className="text-foreground">Location:</strong> Malappuram / Kochi, Kerala, India</span>
+                <span><strong className="text-foreground">Location:</strong> Malappuram / Kozhikode, Kerala, India</span>
               </div>
             </div>
           </div>

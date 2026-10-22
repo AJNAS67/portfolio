@@ -34,7 +34,7 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-lg text-muted-foreground max-w-lg mb-8 leading-relaxed">
-              Software Engineer at <span className="text-foreground font-medium">ULTS Global</span> with 4 years of experience delivering full-stack enterprise web applications, government e-governance platforms (KINFRA), high-performance GIS data pipelines (~28× speedup), and autonomous AI/MCP gateways.
+              Software Engineer at <span className="text-foreground font-medium">UL Technology Solutions (ULTS), Kozhikode</span> with 4 years of experience delivering full-stack enterprise web applications, government e-governance platforms (KINFRA), high-performance GIS data pipelines (~28× speedup), and autonomous AI/MCP gateways.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">

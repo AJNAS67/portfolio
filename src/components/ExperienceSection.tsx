@@ -4,10 +4,10 @@ import { Briefcase, GraduationCap } from 'lucide-react';
 
 const experiences = [
   {
-    company: 'UL Technology Solutions (ULTS)',
+    company: 'UL Technology Solutions Pvt Ltd (ULTS)',
     role: 'Software Engineer',
     period: 'Mar 2025 – Present',
-    location: 'Kochi, Kerala',
+    location: 'Kozhikode, Kerala',
     bullets: [
       'Developed enterprise applications using React, Angular, and TypeScript for government and business workflows.',
       'Contributed to the KINFRA Asset Management System, covering industrial land allocation, investor applications, approval workflows, and document management.',

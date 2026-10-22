@@ -102,7 +102,7 @@ const ContactSection = () => {
                 <div>
                   <p className="text-[11px] text-muted-foreground uppercase font-medium">Location</p>
                   <p className="text-sm font-medium text-foreground">
-                    Malappuram / Kochi, Kerala
+                    Malappuram / Kozhikode, Kerala
                   </p>
                 </div>
               </div>
