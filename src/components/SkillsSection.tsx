@@ -3,13 +3,16 @@ import { useRef } from 'react';
 
 const skills = [
   { name: 'React', level: 90 },
+  { name: 'React Native', level: 80 },
   { name: 'Node.js', level: 85 },
+  { name: 'TypeScript', level: 85 },
   { name: 'Express', level: 85 },
   { name: 'MongoDB', level: 80 },
   { name: 'NestJS', level: 75 },
   { name: 'Angular', level: 70 },
   { name: 'Firebase', level: 70 },
   { name: 'PostgreSQL', level: 65 },
+  { name: 'SQLite', level: 75 },
   { name: 'Three.js', level: 40 },
 ];
 

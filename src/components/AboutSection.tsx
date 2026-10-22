@@ -26,15 +26,15 @@ const AboutSection = () => {
               management dashboards, and scalable enterprise architecture.
             </p>
             <p className="text-muted-foreground leading-relaxed text-lg mb-6">
-              With over 3 years of hands-on experience in full-stack development, I specialize in building 
-              real-time systems, integrated payment solutions, and high-performance admin dashboards using 
-              React, Node.js, NestJS, and MongoDB.
+              With over 3 years of hands-on experience in full-stack and mobile development, I specialize in building 
+              real-time systems, integrated payment solutions, and high-performance applications using 
+              React, React Native, Node.js, NestJS, and MongoDB.
             </p>
             <div className="grid sm:grid-cols-3 gap-6 mt-8">
               {[
                 { value: '3+', label: 'Years Experience' },
                 { value: '10+', label: 'Projects Delivered' },
-                { value: '5+', label: 'Technologies' },
+                { value: '8+', label: 'Technologies' },
               ].map((stat, i) => (
                 <motion.div
                   key={stat.label}
