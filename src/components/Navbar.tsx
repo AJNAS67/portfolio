@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import heroImage from '@/assets/hero-profile.jpg';
 
 const navItems = [
   { label: 'About', href: '#about' },
@@ -32,8 +31,28 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-full overflow-hidden border border-primary/40 ring-1 ring-primary/20 group-hover:border-primary transition-colors">
-            <img src={heroImage} alt="Muhammed Ajnas" className="w-full h-full object-cover" />
+          <div className="w-9 h-9 rounded-xl overflow-hidden shadow-[0_0_12px_hsl(var(--primary)/0.2)] group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.45)] group-hover:scale-105 transition-all duration-300">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+              <defs>
+                <linearGradient id="navAjBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#0f172a" />
+                  <stop offset="100%" stopColor="#020617" />
+                </linearGradient>
+                <linearGradient id="navAjText" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#ffffff" />
+                  <stop offset="100%" stopColor="#38bdf8" />
+                </linearGradient>
+                <linearGradient id="navAjBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.85" />
+                  <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.3" />
+                </linearGradient>
+              </defs>
+              <rect x="1.5" y="1.5" width="37" height="37" rx="10" fill="url(#navAjBg)" stroke="url(#navAjBorder)" strokeWidth="1.5" />
+              <text x="18.5" y="25.5" textAnchor="middle" fontFamily="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Sora', sans-serif" fontWeight="900" fontSize="17" letterSpacing="-0.5" fill="url(#navAjText)">
+                AJ
+              </text>
+              <circle cx="29.5" cy="24.5" r="1.6" fill="#22d3ee" />
+            </svg>
           </div>
           <span className="font-display text-xl font-bold text-gradient">
             AJNAS
