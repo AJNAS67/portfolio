@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ArrowRight, Github, Play, ExternalLink, CheckCircle2, Sparkles, Globe } from 'lucide-react';
+import { ArrowRight, Github, Play, ExternalLink, CheckCircle2, Sparkles, Globe, Workflow } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -18,11 +18,14 @@ interface Project {
   tech: string[];
   liveUrl?: string;
   githubUrl?: string;
+  secondaryGithubUrl?: string;
+  secondaryGithubLabel?: string;
   videoUrl?: string;
   story?: {
     overview: string;
     highlights: string[];
     techDetails?: { name: string; role: string }[];
+    architecture?: string;
   };
 }
 
@@ -57,28 +60,89 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'AI / MCP Gateway Server for Microservices Integration',
+    title: 'Unified AI-Powered Job Portal & MCP Gateway',
     category: 'ai-gis',
-    tag: 'Model Context Protocol · AI Agents',
+    tag: 'Model Context Protocol · Microservices Gateway',
     description:
-      'Unified Model Context Protocol (MCP) gateway connecting autonomous AI agents with distributed candidate and job-vacancy microservices through structured tool calls with stdio and SSE transports.',
-    features: ['Unified MCP Gateway', 'stdio & Express/SSE Transports', 'Zod Schema Validation', 'Cloudflare Tunnel'],
-    tech: ['Node.js', 'Express.js', 'MCP', 'Zod', 'JSON-RPC 2.0', 'SSE', 'Cloudflare Tunnel'],
+      'An enterprise-grade recruitment ecosystem and AI gateway built on Node.js and the Model Context Protocol (MCP). It bridges distributed microservices—Candidate Management and Job Vacancy Services—enabling autonomous LLM agents (Claude, Cursor, Antigravity) to query talent profiles, filter job openings, and analyze market trends in real-time.',
+    features: [
+      'Unified MCP Gateway',
+      'Candidate & Job Microservices',
+      'Zod Schema Validation',
+      'stdio & SSE Transports',
+      'Zero-Trust Cloudflare Ingress',
+    ],
+    tech: [
+      'Node.js',
+      'Express.js',
+      'Model Context Protocol (MCP)',
+      '@modelcontextprotocol/sdk',
+      'Zod',
+      'JSON-RPC 2.0',
+      'RESTful APIs',
+      'Concurrently',
+      'Cloudflare Tunnel',
+    ],
+    githubUrl: 'https://github.com/AJNAS67/mcp-gatwway-server',
+    secondaryGithubUrl: 'https://github.com/AJNAS67/job-portal-services',
+    secondaryGithubLabel: 'Job Services Repo',
     story: {
       overview:
-        'Architected a production-grade MCP Gateway enabling AI agents to interact directly with distributed backend microservices. By implementing the Model Context Protocol, the gateway exposes structured candidate discovery and job-vacancy tool contracts with runtime validation.',
+        'Modern recruitment systems often suffer from fragmented data silos, where candidate databases and job listings live in disconnected microservices, and traditional REST APIs require custom integrations for every AI assistant. To solve this, designed and built a distributed recruitment platform composed of independent microservices (Candidate Service on port 5001, Job Service on port 5002) unified by an autonomous Model Context Protocol (MCP) Gateway Server. The MCP Gateway exposes typed, validated tool endpoints using Zod and JSON-RPC over Stdio and SSE, giving LLMs native, schema-enforced access to live applicant pools, hiring analytics, and job listings without manual dashboard lookups.',
       highlights: [
-        'Architected a unified MCP Gateway connecting AI agents with distributed candidate and job-vacancy microservices through structured tool calls.',
-        'Implemented dual stdio/JSON-RPC and Express/Server-Sent Events (SSE) transports with robust error handling, request timeouts, and integration tests.',
-        'Enforced strict runtime schema validation using Zod for deterministic agent tool parameter binding.',
-        'Integrated Cloudflare Tunnel for secure remote exposure and seamless external agent pair-programming connectivity.',
+        'Architected Distributed Microservices: Engineered decoupled Express.js microservices for Candidate Management (:5001) and Job Vacancies (:5002) with RESTful endpoints, multi-param filtering, and statistical aggregations.',
+        'Model Context Protocol (MCP) Integration: Developed an MCP Gateway using @modelcontextprotocol/sdk and Zod, standardizing LLM interactions via low-latency JSON-RPC over Stdio and Server-Sent Events (SSE).',
+        'Strict Schema & Type Enforcement: Implemented runtime input validation and sanitization with Zod schemas to guarantee type safety and guard against malformed AI tool invocations.',
+        'Automated Testing & Multi-Server Orchestration: Configured unified multi-service startup with Concurrently and automated integration verification suites validating live microservice connectivity, error handling, and JSON-RPC message exchange.',
+        'Zero-Trust Remote Ingress: Integrated Cloudflare Tunnel to expose the gateway securely for remote LLM pair-programming and cloud agents without opening insecure firewall ports.',
+        'Intelligent Cross-Bridge Matching Roadmap: Designed composite orchestration patterns (such as match_candidate_to_jobs) to correlate candidate skill profiles directly against active job vacancies with match scoring.',
       ],
       techDetails: [
-        { name: 'Model Context Protocol (MCP)', role: 'Standardized open protocol for AI agent tool calls and dynamic resource context injection.' },
-        { name: 'Node.js & Express.js', role: 'High-throughput async event loop powering persistent Server-Sent Events (SSE) connections.' },
-        { name: 'Zod & JSON-RPC 2.0', role: 'Strict runtime contract validation and standardized RPC request/response handling.' },
-        { name: 'Cloudflare Tunnel', role: 'Zero-trust ingress allowing secure external agent access without opening firewall ports.' },
+        {
+          name: 'Model Context Protocol (MCP)',
+          role: '@modelcontextprotocol/sdk providing standardized agent tool contracts and dynamic context injection.',
+        },
+        {
+          name: 'Node.js & Express.js',
+          role: 'High-throughput async event loop powering microservices and persistent SSE/stdio communication channels.',
+        },
+        {
+          name: 'Zod & JSON-RPC 2.0',
+          role: 'Strict runtime contract validation ensuring deterministic agent tool parameter binding and safe execution.',
+        },
+        {
+          name: 'Distributed Microservices',
+          role: 'Decoupled candidate management (:5001) and job vacancy (:5002) services with independent REST APIs.',
+        },
+        {
+          name: 'Cloudflare Tunnel',
+          role: 'Zero-trust ingress allowing secure remote AI agent access without exposing local ports.',
+        },
+        {
+          name: 'Concurrently & Dev Tooling',
+          role: 'Multi-service orchestration script coordinating candidate, job, and gateway services simultaneously.',
+        },
       ],
+      architecture: `                    ┌──────────────────────────────────────────────┐
+                    │          AI Host / LLM Client                │
+                    │   (Claude Desktop / Cursor / Antigravity)    │
+                    └──────────────────────┬───────────────────────┘
+                                           │ Stdio (JSON-RPC 2.0)
+                                           ▼
+                    ┌──────────────────────────────────────────────┐
+                    │              MCP Gateway Server              │
+                    │      (Schema Validation via Zod, Routing)    │
+                    ├──────────────────────┬───────────────────────┤
+                    │                      │                       │
+                    │  Tool:               │  Tool:                │
+                    │  get_student_data    │  get_job_list         │
+                    └──────────┬───────────┴───────────┬───────────┘
+                               │ HTTP                  │ HTTP
+                               ▼                       ▼
+                    ┌──────────────────────┐┌──────────────────────┐
+                    │  Candidate Service   ││     Job Service      │
+                    │      (Port 5001)     ││     (Port 5002)      │
+                    └──────────────────────┘└──────────────────────┘`,
     },
   },
   {
@@ -280,11 +344,25 @@ const ProjectCard = ({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub Repository"
-              className="w-8 h-8 rounded-lg border border-border/50 bg-secondary/30 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
-              title="GitHub Repository"
+              aria-label={project.secondaryGithubUrl ? 'MCP Gateway GitHub' : 'GitHub Repository'}
+              className="h-8 px-2.5 rounded-lg border border-border/50 bg-secondary/30 flex items-center gap-1.5 text-muted-foreground hover:text-primary hover:border-primary/50 text-xs font-medium transition-all"
+              title={project.secondaryGithubUrl ? 'MCP Gateway GitHub' : 'GitHub Repository'}
             >
-              <Github size={15} />
+              <Github size={14} />
+              {project.secondaryGithubUrl && <span>Gateway</span>}
+            </a>
+          )}
+          {project.secondaryGithubUrl && (
+            <a
+              href={project.secondaryGithubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={project.secondaryGithubLabel || 'Microservices Repository'}
+              className="h-8 px-2.5 rounded-lg border border-border/50 bg-secondary/30 flex items-center gap-1.5 text-muted-foreground hover:text-primary hover:border-primary/50 text-xs font-medium transition-all"
+              title={project.secondaryGithubLabel || 'Microservices Repository'}
+            >
+              <Github size={14} />
+              <span>Services</span>
             </a>
           )}
           {project.videoUrl && (
@@ -437,7 +515,19 @@ const ProjectsSection = () => {
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/60 bg-secondary/40 hover:bg-secondary text-foreground text-xs font-medium transition-colors"
                     >
                       <Github size={14} />
-                      GitHub Repo
+                      {selectedProject.secondaryGithubUrl ? 'MCP Gateway Repo' : 'GitHub Repo'}
+                      <ExternalLink size={12} className="opacity-60" />
+                    </a>
+                  )}
+                  {selectedProject.secondaryGithubUrl && (
+                    <a
+                      href={selectedProject.secondaryGithubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/60 bg-secondary/40 hover:bg-secondary text-foreground text-xs font-medium transition-colors"
+                    >
+                      <Github size={14} />
+                      {selectedProject.secondaryGithubLabel || 'Microservices Repo'}
                       <ExternalLink size={12} className="opacity-60" />
                     </a>
                   )}
@@ -474,6 +564,18 @@ const ProjectsSection = () => {
                   <p className="text-sm text-foreground/90 leading-relaxed">
                     {selectedProject.story.overview}
                   </p>
+                </div>
+              )}
+
+              {/* Architecture Diagram */}
+              {selectedProject.story?.architecture && (
+                <div className="mb-6">
+                  <h4 className="text-xs uppercase tracking-wider font-semibold text-primary mb-2.5 flex items-center gap-1.5">
+                    <Workflow size={14} /> System & Data Flow Architecture
+                  </h4>
+                  <div className="p-4 sm:p-5 rounded-xl bg-secondary/30 border border-primary/20 font-mono text-[11px] sm:text-xs text-primary/90 overflow-x-auto leading-relaxed shadow-inner backdrop-blur-sm">
+                    <pre className="whitespace-pre font-mono leading-tight">{selectedProject.story.architecture}</pre>
+                  </div>
                 </div>
               )}
 
@@ -544,7 +646,18 @@ const ProjectsSection = () => {
                       className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border/60 hover:border-primary/50 text-foreground text-sm font-medium transition-colors"
                     >
                       <Github size={16} />
-                      View on GitHub
+                      {selectedProject.secondaryGithubUrl ? 'MCP Gateway Repo' : 'View on GitHub'}
+                    </a>
+                  )}
+                  {selectedProject.secondaryGithubUrl && (
+                    <a
+                      href={selectedProject.secondaryGithubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border/60 hover:border-primary/50 text-foreground text-sm font-medium transition-colors"
+                    >
+                      <Github size={16} />
+                      {selectedProject.secondaryGithubLabel || 'Microservices Repo'}
                     </a>
                   )}
                   {selectedProject.videoUrl && (
